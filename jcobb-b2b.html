@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCOBB DECAF — 소규모 카페 B2B 납품 솔루션</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=Noto+Sans+KR:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--ink:#1a1410;--cream:#f6f1e9;--warm:#e8e0d0;--teal:#1d7a68;--rust:#c45c2a;--muted:#7a6a58;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--ink);}
+img{display:block;width:100%;object-fit:cover;}
+.nav{background:var(--ink);padding:1.1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;letter-spacing:5px;color:var(--cream);cursor:pointer;text-decoration:none;}
+.logo sub{font-size:8px;letter-spacing:6px;color:var(--teal);display:block;font-family:'Noto Sans KR',sans-serif;font-weight:300;margin-top:1px;}
+.nav-r{display:flex;align-items:center;gap:2rem;}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{text-decoration:none;color:#7a6a58;font-size:11px;letter-spacing:2px;cursor:pointer;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.on{color:var(--cream);}
+.nav-btn{background:var(--teal);color:#fff;padding:9px 20px;font-size:11px;font-weight:500;letter-spacing:1px;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;}
+.page{display:none;}
+.page.on{display:block;}
+.hero{position:relative;height:90vh;overflow:hidden;}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(26,20,16,0.82) 45%,rgba(26,20,16,0.15) 100%);}
+.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:4rem 2.5rem;}
+.hero-tag{font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1.5rem;}
+.hero-h1{font-family:'Noto Serif KR',serif;font-size:clamp(32px,4.5vw,58px);font-weight:900;color:var(--cream);line-height:1.1;margin-bottom:1.2rem;max-width:620px;}
+.hero-h1 em{font-style:italic;color:var(--teal);font-family:'Cormorant Garamond',serif;font-size:1.1em;font-weight:300;}
+.hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;}
+.hero-sub{font-size:13px;color:rgba(246,241,233,0.65);line-height:1.9;max-width:400px;}
+.hero-btns{display:flex;gap:0.8rem;}
+.btn-fill{background:var(--teal);color:#fff;padding:13px 26px;font-size:12px;font-weight:500;letter-spacing:1px;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;}
+.btn-ghost{background:transparent;color:var(--cream);padding:13px 26px;font-size:12px;letter-spacing:1px;border:1px solid rgba(246,241,233,0.3);cursor:pointer;font-family:'Noto Sans KR',sans-serif;}
+.ticker{background:var(--teal);padding:0.75rem 0;overflow:hidden;}
+.ticker-inner{display:flex;gap:4rem;animation:tick 20s linear infinite;white-space:nowrap;}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{font-size:11px;letter-spacing:3px;color:#fff;font-weight:300;flex-shrink:0;}
+.ticker-sep{color:rgba(255,255,255,0.3);}
+.statement{padding:5rem 2.5rem;background:var(--cream);}
+.stmt-label{font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1.2rem;}
+.stmt-h{font-family:'Noto Serif KR',serif;font-size:clamp(26px,3.5vw,42px);font-weight:900;line-height:1.2;color:var(--ink);margin-bottom:1.5rem;}
+.stmt-h em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--rust);font-size:1.1em;font-weight:300;}
+.stmt-body{font-size:14px;color:var(--muted);line-height:2;max-width:580px;}
+.pain{background:var(--warm);padding:4rem 2.5rem;}
+.pain-h{font-family:'Noto Serif KR',serif;font-size:clamp(22px,3vw,34px);font-weight:900;color:var(--ink);margin-bottom:2.5rem;line-height:1.2;}
+.pain-list{display:flex;flex-direction:column;}
+.pain-item{display:grid;grid-template-columns:56px 1fr;align-items:center;padding:1.4rem 0;border-bottom:0.5px solid #cec4b0;}
+.pain-item:first-child{border-top:0.5px solid #cec4b0;}
+.pain-n{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:#cec4b0;}
+.pain-txt{font-size:14px;color:var(--ink);line-height:1.6;}
+.solution{display:grid;grid-template-columns:1fr 1fr;min-height:560px;background:var(--ink);}
+.sol-img{overflow:hidden;}
+.sol-img img{height:100%;object-fit:cover;}
+.sol-text{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;}
+.sol-label{font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1.2rem;}
+.sol-h{font-family:'Noto Serif KR',serif;font-size:clamp(22px,2.5vw,34px);font-weight:900;color:var(--cream);line-height:1.2;margin-bottom:1.5rem;}
+.sol-list{display:flex;flex-direction:column;gap:1.2rem;}
+.sol-item{display:flex;gap:1rem;align-items:flex-start;}
+.sol-num{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--teal);flex-shrink:0;line-height:1.2;}
+.sol-item-text p:first-child{font-size:13px;font-weight:500;color:var(--cream);margin-bottom:0.3rem;}
+.sol-item-text p:last-child{font-size:12px;color:#a8c5be;line-height:1.7;}
+.recipe{position:relative;height:500px;overflow:hidden;}
+.recipe img{width:100%;height:100%;object-fit:cover;object-position:center;}
+.recipe-overlay{position:absolute;inset:0;background:rgba(26,20,16,0.55);}
+.recipe-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;padding:2rem;}
+.recipe-label{font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1rem;}
+.recipe-h{font-family:'Noto Serif KR',serif;font-size:clamp(24px,3.5vw,44px);font-weight:900;color:var(--cream);line-height:1.2;margin-bottom:1rem;}
+.recipe-h em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--teal);font-size:1.1em;font-weight:300;}
+.recipe-sub{font-size:13px;color:rgba(246,241,233,0.7);max-width:460px;line-height:1.8;}
+.pop-section{display:grid;grid-template-columns:1fr 1fr;min-height:480px;}
+.pop-img{overflow:hidden;}
+.pop-img img{height:100%;object-fit:cover;}
+.pop-text{background:var(--warm);padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;}
+.pop-label{font-size:10px;letter-spacing:5px;color:var(--rust);text-transform:uppercase;margin-bottom:1rem;}
+.pop-h{font-family:'Noto Serif KR',serif;font-size:clamp(20px,2.5vw,30px);font-weight:900;line-height:1.2;margin-bottom:1.2rem;}
+.pop-body{font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:1.5rem;}
+.pop-tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.pop-tag{font-size:11px;color:var(--ink);border:0.5px solid #cec4b0;padding:5px 14px;background:var(--cream);}
+.flow{background:var(--ink);padding:3rem 2.5rem;display:flex;align-items:center;overflow-x:auto;}
+.f-step{text-align:center;flex:1;min-width:80px;}
+.f-num{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#3a3020;margin-bottom:0.3rem;}
+.f-txt{font-size:11px;color:#7a6a58;letter-spacing:1px;}
+.f-arr{color:#3a3020;font-size:18px;flex-shrink:0;padding:0 0.3rem;}
+.target{padding:4rem 2.5rem;background:var(--warm);}
+.tgt-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.tgt-l .label{font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1rem;}
+.tgt-l h2{font-family:'Noto Serif KR',serif;font-size:clamp(22px,3vw,34px);font-weight:900;line-height:1.2;}
+.tgt-r{display:flex;flex-direction:column;}
+.tgt-item{padding:1.2rem 0;border-bottom:0.5px solid #cec4b0;display:flex;gap:1rem;}
+.tgt-item:first-child{border-top:0.5px solid #cec4b0;}
+.tgt-dash{color:var(--teal);}
+.tgt-item p{font-size:13px;color:var(--ink);line-height:1.7;}
+.bottom-cta{background:var(--rust);padding:5rem 2.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2rem;}
+.bc-h{font-family:'Noto Serif KR',serif;font-size:clamp(22px,3vw,36px);font-weight:900;color:#fff;line-height:1.3;}
+.bc-sub{font-size:13px;color:rgba(255,255,255,0.65);margin-top:0.5rem;}
+.btn-white{background:#fff;color:var(--rust);padding:15px 30px;font-size:12px;font-weight:700;letter-spacing:1px;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;white-space:nowrap;}
+.p2-hero{background:var(--cream);padding:5rem 2.5rem 3rem;border-bottom:0.5px solid #cec4b0;}
+.p2-h1{font-family:'Noto Serif KR',serif;font-size:clamp(28px,4vw,50px);font-weight:900;color:var(--ink);line-height:1.1;margin-bottom:1rem;}
+.p2-h1 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--teal);font-size:1.05em;font-weight:300;}
+.svc-block{display:grid;grid-template-columns:220px 1fr;border-bottom:0.5px solid #cec4b0;}
+.svc-block:nth-child(even){background:#fff;}
+.svc-l{padding:3rem 2rem;border-right:0.5px solid #cec4b0;}
+.svc-num{font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:300;color:#e0d8cc;line-height:1;}
+.svc-title{font-family:'Noto Serif KR',serif;font-size:17px;font-weight:900;color:var(--ink);margin-top:0.5rem;}
+.svc-r{padding:3rem 2.5rem;}
+.svc-desc{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:1.5rem;}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;}
+.stag{font-size:11px;color:var(--ink);border:0.5px solid #cec4b0;padding:5px 14px;background:var(--cream);}
+.stag.teal{border-color:var(--teal);color:var(--teal);}
+.p3-hero{background:var(--ink);padding:5rem 2.5rem 4rem;}
+.p3-h1{font-family:'Noto Serif KR',serif;font-size:clamp(28px,4vw,50px);font-weight:900;color:var(--cream);line-height:1.1;max-width:580px;margin-bottom:1rem;}
+.p3-h1 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--rust);font-size:1.05em;font-weight:300;}
+.bean-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#cec4b0;margin-top:2rem;}
+.bean-card{background:var(--cream);padding:2rem 1.5rem;}
+.bean-kw{font-size:10px;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:0.5rem;}
+.bean-val{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--ink);}
+.menu-list{display:flex;flex-direction:column;}
+.menu-item{display:grid;grid-template-columns:1fr auto;align-items:center;padding:1.3rem 0;border-bottom:0.5px solid #cec4b0;}
+.menu-item:first-child{border-top:0.5px solid #cec4b0;}
+.menu-name{font-size:15px;font-weight:500;color:var(--ink);}
+.menu-note{font-size:12px;color:var(--muted);margin-top:3px;}
+.menu-badge{font-size:10px;letter-spacing:2px;color:var(--rust);border:0.5px solid var(--rust);padding:4px 10px;}
+.p4-top{background:var(--ink);padding:5rem 2.5rem 4rem;}
+.p4-h1{font-family:'Noto Serif KR',serif;font-size:clamp(26px,4vw,48px);font-weight:900;color:var(--cream);line-height:1.1;margin-bottom:1rem;}
+.p4-h1 em{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--teal);font-size:1.05em;font-weight:300;}
+.form-outer{padding:4rem 2.5rem;background:var(--cream);}
+.form-inner{max-width:560px;}
+.f-group{margin-bottom:2rem;}
+.f-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;display:block;}
+.f-input{width:100%;background:transparent;border:none;border-bottom:1px solid #cec4b0;padding:10px 0;font-size:14px;color:var(--ink);font-family:'Noto Sans KR',sans-serif;outline:none;}
+.f-input:focus{border-bottom-color:var(--ink);}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+.radio-inline{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;}
+.r-pill{font-size:12px;color:var(--muted);border:0.5px solid #cec4b0;padding:7px 16px;cursor:pointer;transition:all 0.15s;}
+.r-pill:hover,.r-pill.sel{background:var(--ink);color:var(--cream);border-color:var(--ink);}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.5rem;}
+.c-pill{font-size:12px;color:var(--muted);border:0.5px solid #cec4b0;padding:7px 16px;cursor:pointer;transition:all 0.15s;}
+.c-pill:hover,.c-pill.sel{background:var(--teal);color:#fff;border-color:var(--teal);}
+.f-textarea{width:100%;background:transparent;border:none;border-bottom:1px solid #cec4b0;padding:10px 0;font-size:14px;color:var(--ink);font-family:'Noto Sans KR',sans-serif;outline:none;height:70px;resize:none;}
+.submit{width:100%;background:var(--ink);color:var(--cream);padding:18px;font-size:13px;font-weight:500;letter-spacing:2px;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;margin-top:1rem;}
+.submit:hover{background:#2a2218;}
+.f-note{font-size:11px;color:#b0a090;text-align:center;margin-top:1rem;letter-spacing:1px;}
+.footer{background:#0e0c08;padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer p{font-size:11px;color:#3a3020;letter-spacing:1px;}
+.footer a{font-size:11px;color:#4a3a28;text-decoration:none;letter-spacing:1px;}
+.footer a:hover{color:#7a6a58;}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .hero-content{padding:2rem 1.5rem;}
+  .solution,.pop-section,.tgt-inner,.bottom-cta{grid-template-columns:1fr;}
+  .svc-block{grid-template-columns:1fr;}
+  .svc-l{border-right:none;border-bottom:0.5px solid #cec4b0;}
+  .f-row{grid-template-columns:1fr;}
+  .statement,.pain,.target,.form-outer,.p2-hero,.p3-hero,.p4-top{padding:3rem 1.5rem;}
+  .sol-text,.pop-text{padding:2.5rem 1.5rem;}
+  .btn-white{width:100%;text-align:center;}
+}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a class="logo" onclick="showP(0)">JCOBB DECAF<sub>B2B 납품 솔루션</sub></a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a onclick="showP(0)" class="on" id="nl0">메인</a></li>
+      <li><a onclick="showP(1)" id="nl1">솔루션</a></li>
+      <li><a onclick="showP(2)" id="nl2">원두·메뉴</a></li>
+      <li><a onclick="showP(3)" id="nl3">상담 신청</a></li>
+    </ul>
+    <button class="nav-btn" onclick="showP(3)">테스트빈 신청</button>
+  </div>
+</nav>
+
+<!-- PAGE 1 -->
+<div class="page on" id="pg0">
+  <div class="hero">
+    <img src="https://raw.githubusercontent.com/junhachung29-dev/Jcobb_coffee/main/images/product-3.png" alt="JCOBB B2B">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-tag">소규모 카페 B2B 솔루션 · JCOBB DECAF</p>
+      <h1 class="hero-h1">디카페인 시즌메뉴,<br>원두부터 레시피와<br><em>POP까지 한 번에.</em></h1>
+      <div class="hero-bottom">
+        <p class="hero-sub">원두를 구매하시면, 시즌 메뉴 레시피와 매장 POP까지 함께 제공됩니다.</p>
+        <div class="hero-btns">
+          <button class="btn-fill" onclick="showP(3)">테스트빈 신청하기</button>
+          <button class="btn-ghost" onclick="showP(1)">솔루션 보기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item">프리미엄 디카페인 원두</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">시즌 메뉴 레시피</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">매장 POP 지원</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">카페인 99.9% 제거</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">Swiss Water® 공정</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">소규모 카페 전용</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">프리미엄 디카페인 원두</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">시즌 메뉴 레시피</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">매장 POP 지원</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">카페인 99.9% 제거</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">Swiss Water® 공정</span><span class="ticker-sep"> · </span>
+      <span class="ticker-item">소규모 카페 전용</span><span class="ticker-sep"> · </span>
+    </div>
+  </div>
+  <div class="statement">
+    <p class="stmt-label">우리가 다른 이유</p>
+    <h2 class="stmt-h">원두만 팔지 않습니다.<br><em>디카페인 메뉴 도입,</em><br>처음부터 끝까지.</h2>
+    <p class="stmt-body">원두를 구매하시면, 여름 시즌 메뉴 레시피와 매장에서 바로 쓸 수 있는 POP까지 함께 제공됩니다. 카페 사장님이 신경 써야 할 것은 딱 하나, 커피를 내리는 것뿐입니다.</p>
+  </div>
+  <div class="pain">
+    <p style="font-size:10px;letter-spacing:5px;color:var(--muted);text-transform:uppercase;margin-bottom:0.8rem;">카페 사장님의 고민</p>
+    <h2 class="pain-h">이런 이유로<br>디카페인 도입을<br>미루고 있진 않으신가요?</h2>
+    <div class="pain-list">
+      <div class="pain-item"><span class="pain-n">01</span><p class="pain-txt">어떤 디카페인 원두를 써야 할지 모르겠다</p></div>
+      <div class="pain-item"><span class="pain-n">02</span><p class="pain-txt">메뉴 레시피를 직접 개발하기가 어렵다</p></div>
+      <div class="pain-item"><span class="pain-n">03</span><p class="pain-txt">홍보용 POP나 포스터를 만들 시간이 없다</p></div>
+      <div class="pain-item"><span class="pain-n">04</span><p class="pain-txt">디카페인 수요는 느는데 어떻게 시작해야 할지 막막하다</p></div>
+    </div>
+  </div>
+  <div class="solution">
+    <div class="sol-img">
+      <img src="https://raw.githubusercontent.com/junhachung29-dev/Jcobb_coffee/main/images/product-2.png" alt="JCOBB 제품">
+    </div>
+    <div class="sol-text">
+      <p class="sol-label">JCOBB DECAF 솔루션</p>
+      <h2 class="sol-h">세 가지를<br>함께 드립니다</h2>
+      <div class="sol-list">
+        <div class="sol-item"><span class="sol-num">01</span><div class="sol-item-text"><p>프리미엄 디카페인 원두</p><p>Swiss Water® 공정, 카페인 99.9% 제거. 고소묵직부터 산미까지 선택 가능.</p></div></div>
+        <div class="sol-item"><span class="sol-num">02</span><div class="sol-item-text"><p>여름 시즌 메뉴 레시피</p><p>샤케라또, 오렌지 커피 등 바로 판매할 수 있는 실전형 레시피 제공.</p></div></div>
+        <div class="sol-item"><span class="sol-num">03</span><div class="sol-item-text"><p>매장 POP / 포스터 지원</p><p>카운터 POP, 시즌 포스터, SNS 이미지까지. 인쇄해서 바로 사용.</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="recipe">
+    <img src="https://raw.githubusercontent.com/junhachung29-dev/Jcobb_coffee/main/images/product-4.png" alt="레시피 가이드">
+    <div class="recipe-overlay"></div>
+    <div class="recipe-content">
+      <p class="recipe-label">시즌 메뉴 레시피</p>
+      <h2 class="recipe-h">Summer Recipe Guide<br><em>Crafted for Warm Days</em></h2>
+      <p class="recipe-sub">아이스 아메리카노부터 샤케라또, 오렌지 라떼까지. 소규모 카페에서 바로 판매할 수 있는 실전형 레시피를 함께 드립니다.</p>
+    </div>
+  </div>
+  <div class="pop-section">
+    <div class="pop-img">
+      <img src="https://raw.githubusercontent.com/junhachung29-dev/Jcobb_coffee/main/images/product-3.png" alt="매장 POP 연출">
+    </div>
+    <div class="pop-text">
+      <p class="pop-label">매장 POP 지원</p>
+      <h2 class="pop-h">메뉴를 만들어도<br>알리지 않으면<br>팔리지 않습니다.</h2>
+      <p class="pop-body">카페에서 바로 사용할 수 있는 매장 안내 POP와 포스터 이미지를 함께 지원합니다. 별도 제작 없이 바로 인쇄해서 활용하세요.</p>
+      <div class="pop-tags">
+        <span class="pop-tag">카운터 POP</span>
+        <span class="pop-tag">시즌 포스터</span>
+        <span class="pop-tag">인스타그램 이미지</span>
+        <span class="pop-tag">테이블 스탠드</span>
+      </div>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="f-step"><div class="f-num">01</div><div class="f-txt">테스트빈 신청</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">02</div><div class="f-txt">원두 상담</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">03</div><div class="f-txt">레시피 안내</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">04</div><div class="f-txt">POP 제공</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">05</div><div class="f-txt">매장 적용</div></div>
+  </div>
+  <div class="target">
+    <div class="tgt-inner">
+      <div class="tgt-l"><p class="label">이런 카페에 맞습니다</p><h2>디카페인을<br>시작하고 싶은<br>모든 카페</h2></div>
+      <div class="tgt-r">
+        <div class="tgt-item"><span class="tgt-dash">—</span><p>디카페인 메뉴를 새로 도입하려는 카페</p></div>
+        <div class="tgt-item"><span class="tgt-dash">—</span><p>여름 시즌 메뉴를 준비하는 소규모 카페</p></div>
+        <div class="tgt-item"><span class="tgt-dash">—</span><p>카페인 민감 고객, 임산부, 오후 고객을 잡고 싶은 카페</p></div>
+        <div class="tgt-item"><span class="tgt-dash">—</span><p>원두를 먼저 테스트해보고 결정하고 싶은 카페</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-cta">
+    <div><h2 class="bc-h">우리 카페에 맞는<br>디카페인 원두,<br>먼저 테스트해보세요.</h2><p class="bc-sub">신청 후 영업일 기준 1~2일 내 담당자가 연락드립니다.</p></div>
+    <button class="btn-white" onclick="showP(3)">테스트빈 신청하기 →</button>
+  </div>
+  <div class="footer"><p>© 2024 JCOBB COFFEE · 디카페인 전문 로스터리</p><div style="display:flex;gap:2rem;"><a href="https://smartstore.naver.com/coffeesocietyseoul" target="_blank">네이버 스토어</a><a href="#">인스타그램</a></div></div>
+</div>
+
+<!-- PAGE 2 솔루션 -->
+<div class="page" id="pg1">
+  <div class="p2-hero">
+    <p style="font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1.2rem;">솔루션 상세</p>
+    <h1 class="p2-h1">원두만 드리지 않습니다.<br><em>디카페인 메뉴 준비까지</em><br>함께.</h1>
+  </div>
+  <div class="svc-block">
+    <div class="svc-l"><div class="svc-num">01</div><p class="svc-title">프리미엄<br>디카페인 원두</p></div>
+    <div class="svc-r"><p class="svc-desc">카페인 부담은 낮추고, 커피의 풍미는 살린 디카페인 원두를 제공합니다.</p><div class="tag-row"><span class="stag teal">카페인 99.9% 제거</span><span class="stag teal">클린 디카페인</span><span class="stag">고소묵직 / 산미 선택</span><span class="stag">에스프레소 적용</span><span class="stag">드립백 연계</span></div></div>
+  </div>
+  <div class="svc-block">
+    <div class="svc-l"><div class="svc-num">02</div><p class="svc-title">시즌 메뉴<br>레시피 제공</p></div>
+    <div class="svc-r"><p class="svc-desc">여름 시즌에 바로 활용할 수 있는 디카페인 메뉴 레시피를 함께 제공합니다.</p><div class="tag-row"><span class="stag">아이스 아메리카노</span><span class="stag">라떼</span><span class="stag">샤케라또</span><span class="stag">오렌지 커피</span></div></div>
+  </div>
+  <div class="svc-block">
+    <div class="svc-l"><div class="svc-num">03</div><p class="svc-title">매장 POP /<br>포스터 지원</p></div>
+    <div class="svc-r"><p class="svc-desc">카페에서 바로 사용할 수 있는 POP와 포스터 이미지를 함께 지원합니다.</p><div class="tag-row"><span class="stag">카운터 POP</span><span class="stag">시즌 포스터</span><span class="stag">드립백 안내문</span><span class="stag">인스타그램 이미지</span></div></div>
+  </div>
+  <div class="flow">
+    <div class="f-step"><div class="f-num">01</div><div class="f-txt">테스트빈 신청</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">02</div><div class="f-txt">원두 상담</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">03</div><div class="f-txt">레시피 안내</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">04</div><div class="f-txt">POP 제공</div></div><div class="f-arr">→</div>
+    <div class="f-step"><div class="f-num">05</div><div class="f-txt">매장 적용</div></div>
+  </div>
+  <div class="bottom-cta">
+    <div><h2 class="bc-h">납품 상담을<br>신청해보세요.</h2><p class="bc-sub">영업일 기준 1~2일 내 연락드립니다.</p></div>
+    <button class="btn-white" onclick="showP(3)">납품 상담 신청하기 →</button>
+  </div>
+  <div class="footer"><p>© 2024 JCOBB COFFEE</p><div style="display:flex;gap:2rem;"><a href="https://smartstore.naver.com/coffeesocietyseoul" target="_blank">네이버 스토어</a></div></div>
+</div>
+
+<!-- PAGE 3 원두메뉴 -->
+<div class="page" id="pg2">
+  <div class="p3-hero">
+    <p style="font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1.2rem;">원두 & 시즌 메뉴</p>
+    <h1 class="p3-h1">카페 메뉴로 판매할 수 있는<br><em>풍미 좋은 디카페인</em></h1>
+    <p style="font-size:13px;color:#a8c5be;max-width:460px;line-height:1.9;margin-top:1.2rem;">단순히 카페인을 줄인 커피가 아닙니다. 풍미와 활용성을 기준으로 제안합니다.</p>
+  </div>
+  <div style="padding:3rem 2.5rem;background:var(--cream);">
+    <p style="font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1.5rem;">원두 핵심 지표</p>
+    <div class="bean-grid">
+      <div class="bean-card"><div class="bean-kw">카페인 제거율</div><div class="bean-val">99.9%</div></div>
+      <div class="bean-card"><div class="bean-kw">디카페인 공법</div><div class="bean-val">Swiss Water®</div></div>
+      <div class="bean-card"><div class="bean-kw">원두 등급</div><div class="bean-val">Single Origin</div></div>
+    </div>
+  </div>
+  <div style="height:400px;overflow:hidden;">
+    <img src="https://raw.githubusercontent.com/junhachung29-dev/Jcobb_coffee/main/images/product-4.png" alt="레시피 가이드" style="height:100%;object-fit:cover;object-position:center top;">
+  </div>
+  <div style="padding:3rem 2.5rem;background:var(--warm);">
+    <p style="font-size:10px;letter-spacing:5px;color:var(--rust);text-transform:uppercase;margin-bottom:0.5rem;">추천 시즌 메뉴</p>
+    <h2 style="font-family:'Noto Serif KR',serif;font-size:28px;font-weight:900;margin-bottom:2rem;">여름 시즌 메뉴 4종</h2>
+    <div class="menu-list">
+      <div class="menu-item"><div><div class="menu-name">디카페인 아이스 아메리카노</div><div class="menu-note">가장 쉽게 도입 가능한 기본 메뉴</div></div><span class="menu-badge">기본</span></div>
+      <div class="menu-item"><div><div class="menu-name">디카페인 라떼</div><div class="menu-note">오후 고객 · 카페인 민감 고객 대응</div></div></div>
+      <div class="menu-item"><div><div class="menu-name">디카페인 샤케라또</div><div class="menu-note">방배상회 콜라보 검증 · 여름 시그니처</div></div><span class="menu-badge">추천</span></div>
+      <div class="menu-item"><div><div class="menu-name">디카페인 오렌지 커피</div><div class="menu-note">시즌 한정 · SNS 반응 좋은 차별화 메뉴</div></div></div>
+    </div>
+  </div>
+  <div class="bottom-cta">
+    <div><h2 class="bc-h">원두와 드립백을<br>함께 상담해보세요.</h2><p class="bc-sub">영업일 기준 1~2일 내 연락드립니다.</p></div>
+    <button class="btn-white" onclick="showP(3)">제품 상담 신청하기 →</button>
+  </div>
+  <div class="footer"><p>© 2024 JCOBB COFFEE</p><div style="display:flex;gap:2rem;"><a href="https://smartstore.naver.com/coffeesocietyseoul" target="_blank">네이버 스토어</a></div></div>
+</div>
+
+<!-- PAGE 4 폼 -->
+<div class="page" id="pg3">
+  <div class="p4-top">
+    <p style="font-size:10px;letter-spacing:5px;color:var(--teal);text-transform:uppercase;margin-bottom:1.2rem;">테스트빈 & 납품 상담</p>
+    <h1 class="p4-h1">우리 카페에 맞는<br><em>디카페인 원두,</em><br>먼저 테스트해보세요.</h1>
+    <p style="font-size:13px;color:#a8c5be;max-width:420px;line-height:1.9;margin-top:1.2rem;">테스트빈 신청 시 시즌 메뉴 레시피와 POP 활용 방향을 함께 안내드립니다.</p>
+  </div>
+  <div class="form-outer">
+    <div class="form-inner">
+      <div class="f-row">
+        <div class="f-group"><label class="f-label">카페명</label><input class="f-input" type="text" placeholder="카페 이름"></div>
+        <div class="f-group"><label class="f-label">담당자명</label><input class="f-input" type="text" placeholder="성함"></div>
+      </div>
+      <div class="f-row">
+        <div class="f-group"><label class="f-label">연락처</label><input class="f-input" type="tel" placeholder="010-0000-0000"></div>
+        <div class="f-group"><label class="f-label">지역</label><input class="f-input" type="text" placeholder="예) 서울 마포구"></div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">디카페인 메뉴 운영 여부</label>
+        <div class="radio-inline" id="rg1">
+          <div class="r-pill" onclick="selR('rg1',this)">현재 운영 중</div>
+          <div class="r-pill" onclick="selR('rg1',this)">도입 예정</div>
+          <div class="r-pill sel" onclick="selR('rg1',this)">아직 고민 중</div>
+        </div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">월 원두 사용량</label>
+        <div class="radio-inline" id="rg2">
+          <div class="r-pill" onclick="selR('rg2',this)">1kg 미만</div>
+          <div class="r-pill" onclick="selR('rg2',this)">1~3kg</div>
+          <div class="r-pill" onclick="selR('rg2',this)">3~5kg</div>
+          <div class="r-pill" onclick="selR('rg2',this)">5kg 이상</div>
+          <div class="r-pill sel" onclick="selR('rg2',this)">잘 모르겠음</div>
+        </div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">관심 제품 (복수 선택)</label>
+        <div class="check-grid">
+          <div class="c-pill" onclick="togC(this)">디카페인 에스프레소 원두</div>
+          <div class="c-pill" onclick="togC(this)">디카페인 드립백</div>
+          <div class="c-pill sel" onclick="togC(this)" style="grid-column:1/-1;">원두 + 레시피 + POP 패키지</div>
+          <div class="c-pill" onclick="togC(this)">테스트빈 신청</div>
+        </div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">상담 희망 내용</label>
+        <div class="check-grid">
+          <div class="c-pill sel" onclick="togC(this)">디카페인 원두 추천</div>
+          <div class="c-pill" onclick="togC(this)">시즌 레시피 상담</div>
+          <div class="c-pill" onclick="togC(this)">매장 POP 상담</div>
+          <div class="c-pill" onclick="togC(this)">드립백 판매 상담</div>
+        </div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">문의 내용</label>
+        <textarea class="f-textarea" placeholder="자유롭게 문의 내용을 입력해주세요."></textarea>
+      </div>
+      <button class="submit">디카페인 테스트빈 신청하기</button>
+      <p class="f-note">신청 후 영업일 기준 1~2일 내 담당자가 연락드립니다.</p>
+    </div>
+  </div>
+  <div class="footer"><p>© 2024 JCOBB COFFEE · 디카페인 전문 로스터리</p><div style="display:flex;gap:2rem;"><a href="https://smartstore.naver.com/coffeesocietyseoul" target="_blank">네이버 스토어</a><a href="#">인스타그램</a></div></div>
+</div>
+
+<script>
+function showP(n){
+  document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('on',i===n));
+  ['nl0','nl1','nl2','nl3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle('on',i===n);
+  });
+  window.scrollTo(0,0);
+}
+function selR(gid,el){
+  document.getElementById(gid).querySelectorAll('.r-pill').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function togC(el){el.classList.toggle('sel');}
+</script>
+</body>
+</html>
